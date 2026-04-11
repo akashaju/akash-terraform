@@ -1,0 +1,7 @@
+region              = "ap-south-1"
+cidr_block          = "10.1.0.0/16"
+public_subnet_cidr  = "10.1.1.0/24"
+instance_type       = "t3.small"
+ami                 = "ami-0f5ee92e2d63afc18"
+key_name            = "test"
+env                 = "prod"
