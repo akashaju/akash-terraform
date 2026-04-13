@@ -1,0 +1,35 @@
+name: Destroy Prod Infra
+
+on:
+  workflow_dispatch:   # manual trigger (safe)
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform-destroy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::427606711694:role/github-terraform-role
+          aws-region: ap-south-1
+
+      - name: Terraform Init
+        run: |
+          cd envs/prod
+          terraform init
+
+      - name: Terraform Destroy
+        run: |
+          cd envs/prod
+          terraform destroy -auto-approve
