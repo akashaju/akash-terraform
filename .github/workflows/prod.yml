@@ -1,0 +1,31 @@
+name: Deploy Prod
+on:
+  workflow_dispatch
+permissions:
+  id_token: write
+  content: read
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3  
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v3
+      - name: awsconfigure aws credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::427606711694:role/github-terraform-role
+          aws-region: ap-south-1
+      - name: Terraform init
+        run: |
+          cd /envs/Prod
+          terraform init
+      - name: Terraform Plan
+        run: |
+          cd /envs/Prod
+          terraform plan
+      - name: Terraform Apply
+        run: |
+          cd /envs/Prod
+          terraform apply - auto-approve          
