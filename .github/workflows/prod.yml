@@ -19,13 +19,13 @@ jobs:
           aws-region: ap-south-1
       - name: Terraform init
         run: |
-          cd /envs/Prod
+          cd /envs/prod
           terraform init
       - name: Terraform Plan
         run: |
-          cd /envs/Prod
+          cd /envs/prod
           terraform plan
       - name: Terraform Apply
         run: |
-          cd /envs/Prod
+          cd /envs/prod
           terraform apply - auto-approve          
