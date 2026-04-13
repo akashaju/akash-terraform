@@ -30,6 +30,6 @@ jobs:
       - name: Terraform Apply
         run: |
           cd envs/dev
-          terraform apply     
+          terraform apply -auto-approve 
           
             
