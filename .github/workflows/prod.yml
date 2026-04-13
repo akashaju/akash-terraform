@@ -2,7 +2,7 @@ name: Deploy Prod
 on:
   workflow_dispatch
 permissions:
-  id_token: write
+  id-token: write
   contents: read
 jobs:
   terraform:
